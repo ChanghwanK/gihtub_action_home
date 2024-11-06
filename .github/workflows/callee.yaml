@@ -1,0 +1,23 @@
+
+name: Callee Workflow
+
+on:
+  workflow_call:
+    inputs:
+      env:
+        type: string
+        required: true
+      notify:
+        type: boolean
+        default: false
+
+
+job:
+  runs-on: ubuntu-22.04
+  steps:
+    - name: Called Workflow
+      run: echo "Called Workflow"
+
+    - name: Notify
+      if: ${{ github.event.inputs.notify }}
+      run: echo "Notify"

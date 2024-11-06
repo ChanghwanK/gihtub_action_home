@@ -1,0 +1,15 @@
+name: Called Caller Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  name: Caller Job
+  runs-on: ubuntu-22.04
+  uses: ./.github/workflows/callee.yml
+  with:
+    env: 'production'
+    notify: true
