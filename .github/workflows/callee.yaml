@@ -1,6 +1,4 @@
-
-name: Callee Workflow
-
+name: Called Workflow
 on:
   workflow_call:
     inputs:
@@ -11,15 +9,14 @@ on:
         type: boolean
         default: false
 
-
-job:
-  call:
-    environment: ${{ github.event.inputs.env }}
+jobs:  # This is the missing part that wraps your job definition
+  run:
     runs-on: ubuntu-22.04
+    environment: ${{ github.event.inputs.env }}
     steps:
-    - name: Called Workflow
-      run: echo "Called Workflow"
-
-    - name: Notify
-      if: ${{ github.event.inputs.notify }}
-      run: echo "Notify"
+      - name: Called Workflow
+        run: echo "Called Workflow"
+      
+      - name: Notify
+        if: ${{ github.event.inputs.notify }}
+        run: echo "Notify"
